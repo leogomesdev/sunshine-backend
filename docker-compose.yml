@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: sunshine-mongodb
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    restart: always
+    volumes:
+      - ../sunshine-backend/data:/data/db
+    ports:
+      - "27018:27017"
+    networks:
+      - backend
+  api:
+    build: ../sunshine-backend/.
+    container_name: sunshine-backend
+    command: npm run start:prod
+    working_dir: /app
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - MONGODB_URL=mongodb://db:27017/sunshine
+      - JWT_SECRET=changethissecret
+      - JWT_ACCESS_EXPIRATION_MINUTES=60
+    depends_on:
+      - db
+    networks:
+      - backend
+      - frontend
+  app:
+    build: ../sunshine-frontend/.
+    container_name: sunshine-frontend
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_SUNSHINE_BACKEND_URL=http://localhost:3001/api/v1
+    depends_on:
+      - api
+    networks:
+      - frontend
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge

@@ -1,5 +1,5 @@
 import httpStatus from "http-status";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import User from "./user.model";
 import { IValidRegisterUserBody, IUserDoc } from "./user.interfaces";
 import { ApiError } from "../../errors";
