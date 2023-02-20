@@ -72,6 +72,8 @@ This project provides APIs for the frontend application.
 
 ## 🔗 Usage (Backend)
 
+🔎 Check the API documentation [available at swagger](https://app.swaggerhub.com/apis-docs/leogomesdev/sunshine/0.1.0) (OpenAPI 3.0)
+
 1. Using [Postman](https://www.postman.com), go to the menu **Files > Import** and import the file **Sunshine.postman_collection.json**, available in the [docs](/docs) folder
 
 - After importing, the **API Collection** will be available on the left:
