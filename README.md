@@ -12,7 +12,7 @@ This project provides APIs for the frontend application.
 
 ## 📲 Main technologies used
 
-- [Express](https://expressjs.com), a minimalist web framework for Node.js
+- [Express](https://expressjs.com) version 4, a minimalist web framework for Node.js
 - [MongoDB](https://www.mongodb.com) as database
 - [Mongoose](https://mongoosejs.com) for database connection
 - REST API

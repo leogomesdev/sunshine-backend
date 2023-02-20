@@ -7,14 +7,11 @@ import routerVersion1 from "./routes/v1";
 import { ApiError, errorHandler } from "./errors";
 import config from "./config/config";
 
-const app = express();
+export const app = express();
 
-const db: MongoConnection = new MongoConnection(config.mongo.url);
+export const db: MongoConnection = new MongoConnection(config.mongo.url);
 
 db.connect()
-  .then(() => {
-    console.log("Database connected");
-  })
   .catch((error) => {
     console.error("Database connection error:", error);
   });
@@ -34,11 +31,9 @@ app.use((_req, _res, next) => {
 
 app.use(errorHandler);
 
-app.listen(config.port, () => {
-  console.log(`Server started on port ${config.port}`);
-});
-
 process.on("SIGINT", async () => {
   await db.disconnect();
   process.exit(0);
 });
+
+export const server = app.listen(config.port);
